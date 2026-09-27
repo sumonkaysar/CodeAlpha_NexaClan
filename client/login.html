@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f5f0" />
+    <title>Sign in | NexaClan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="auth-page" data-page="login">
+    <header class="topbar auth-topbar">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">n</span>nexaclan</a
+      ><a class="back-link" href="index.html">← Back to feed</a>
+    </header>
+    <main class="auth-layout">
+      <div class="auth-art">
+        <span class="art-kicker">A SOCIAL PLACE FOR</span>
+        <h1>Ideas in<br /><em>good company.</em></h1>
+        <p>
+          Follow the things you care about and the people bringing them to life.
+        </p>
+        <span class="art-stamp">NC<br />/ 01</span>
+      </div>
+      <section class="auth-form-wrap">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h2>Good to see you.</h2>
+        <p class="auth-subtitle">Sign in and pick up where you left off.</p>
+        <form id="auth-form" class="auth-form">
+          <label
+            >Email address<input
+              type="email"
+              name="email"
+              autocomplete="email"
+              required /></label
+          ><label
+            >Password<input
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              required
+              minlength="8"
+          /></label>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button class="button button-primary auth-submit" type="submit">
+            Sign in <span aria-hidden="true">↗</span>
+          </button>
+        </form>
+        <p class="auth-switch">
+          New around here? <a href="register.html">Make an account</a>
+        </p>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

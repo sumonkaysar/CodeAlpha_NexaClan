@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f5f0" />
+    <title>Profile | NexaClan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="profile">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="NexaClan home"
+        ><span class="brand-mark">n</span>nexaclan</a
+      >
+      <form class="search-box" id="people-search">
+        <span aria-hidden="true">⌕</span
+        ><input
+          name="q"
+          id="search-input"
+          placeholder="Find your people"
+          aria-label="Search people"
+          autocomplete="off"
+        />
+        <div class="search-results" id="search-results" hidden></div>
+      </form>
+      <nav class="top-actions" aria-label="Account navigation">
+        <a href="index.html">Feed</a
+        ><span id="account-nav"
+          ><a href="login.html">Sign in</a
+          ><a class="nav-join" href="register.html">Join</a></span
+        >
+      </nav>
+    </header>
+    <main class="profile-layout">
+      <a class="back-link profile-back" href="index.html">← Back to feed</a>
+      <section id="profile-content" class="profile-content">
+        <p class="loading-state">Finding this profile...</p>
+      </section>
+      <section class="profile-posts">
+        <div class="profile-posts-heading">
+          <p class="eyebrow">RECENTLY SHARED</p>
+          <h2>Posts</h2>
+        </div>
+        <div class="post-list" id="post-list" aria-live="polite"></div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f5f0" />
+    <meta
+      name="description"
+      content="NexaClan is a place to share what you are making, learning, and thinking about."
+    />
+    <title>NexaClan | Your people, your feed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-page="feed">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="NexaClan home"
+        ><span class="brand-mark">n</span>nexaclan</a
+      >
+      <form class="search-box" id="people-search">
+        <span aria-hidden="true">⌕</span
+        ><input
+          name="q"
+          id="search-input"
+          placeholder="Find your people"
+          aria-label="Search people"
+          autocomplete="off"
+        />
+        <div class="search-results" id="search-results" hidden></div>
+      </form>
+      <nav class="top-actions" aria-label="Account navigation">
+        <a class="active" href="index.html">Feed</a
+        ><span id="account-nav"
+          ><a href="login.html">Sign in</a
+          ><a class="nav-join" href="register.html">Join</a></span
+        >
+      </nav>
+    </header>
+    <main class="layout">
+      <aside class="left-rail">
+        <div class="rail-links">
+          <a class="rail-link active" href="index.html"><span>⌂</span> Home</a
+          ><a class="rail-link" href="#people"><span>◎</span> People</a>
+        </div>
+        <section class="rail-note">
+          <span class="note-orbit" aria-hidden="true">✳</span>
+          <p>Good things happen when ideas find their people.</p>
+          <span class="note-label">A place to share the in-between.</span>
+        </section>
+        <p class="rail-foot">NEXACLAN · 2026</p>
+      </aside>
+      <section class="feed-column" aria-label="Social feed">
+        <div class="feed-heading">
+          <div>
+            <p class="eyebrow">YOUR CORNER OF THE INTERNET</p>
+            <h1>What’s happening</h1>
+          </div>
+          <span id="feed-status" class="feed-status">Loading your feed</span>
+        </div>
+        <section
+          class="composer"
+          id="composer"
+          hidden
+          aria-label="Create a post"
+        >
+          <div class="composer-top">
+            <div class="avatar avatar-current" id="composer-avatar">N</div>
+            <label class="sr-only" for="post-text">Write a post</label
+            ><textarea
+              id="post-text"
+              maxlength="2000"
+              rows="3"
+              placeholder="What’s on your mind?"
+            ></textarea>
+          </div>
+          <div class="composer-bottom">
+            <input
+              id="post-image"
+              type="url"
+              placeholder="Image URL (optional)"
+              aria-label="Image URL"
+            /><span class="char-count" id="char-count">0 / 2000</span
+            ><button
+              class="button button-primary"
+              id="publish-post"
+              type="button"
+            >
+              Share post <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </section>
+        <div class="signed-out-prompt" id="signed-out-prompt" hidden>
+          <p>Pull up a chair. Your feed starts here.</p>
+          <a class="button button-primary" href="register.html"
+            >Create an account <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="post-list" id="post-list" aria-live="polite">
+          <p class="loading-state">Gathering the latest...</p>
+        </div>
+      </section>
+      <aside class="right-rail" id="people">
+        <div class="you-panel" id="you-panel" hidden></div>
+        <section class="people-panel">
+          <div class="panel-heading">
+            <h2>People to know</h2>
+            <span>+</span>
+          </div>
+          <div id="suggested-people" class="suggested-list">
+            <p class="muted">Meet the community</p>
+          </div>
+        </section>
+        <div class="right-rail-footer">
+          <a href="#about">About</a><a href="#privacy">Privacy</a
+          ><span>© NexaClan</span>
+        </div>
+      </aside>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

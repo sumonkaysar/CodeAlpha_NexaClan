@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f5f0" />
+    <title>Join NexaClan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="auth-page" data-page="register">
+    <header class="topbar auth-topbar">
+      <a class="brand" href="index.html"
+        ><span class="brand-mark">n</span>nexaclan</a
+      ><a class="back-link" href="index.html">← Back to feed</a>
+    </header>
+    <main class="auth-layout">
+      <div class="auth-art">
+        <span class="art-kicker">YOUR NEXT CHAPTER STARTS HERE</span>
+        <h1>Find your<br /><em>kind of people.</em></h1>
+        <p>A feed made for sharing the process, not just the polished parts.</p>
+        <span class="art-stamp">NC<br />/ 02</span>
+      </div>
+      <section class="auth-form-wrap">
+        <p class="eyebrow">JOIN THE COMMUNITY</p>
+        <h2>Make yourself at home.</h2>
+        <p class="auth-subtitle">A few details, then you’re in.</p>
+        <form id="auth-form" class="auth-form">
+          <label
+            >Your name<input
+              type="text"
+              name="displayName"
+              autocomplete="name"
+              required
+              maxlength="48" /></label
+          ><label
+            >Username<input
+              type="text"
+              name="username"
+              autocomplete="username"
+              required
+              minlength="3"
+              maxlength="24"
+              pattern="[A-Za-z0-9_]+"
+            /><small>Letters, numbers, and underscores.</small></label
+          ><label
+            >Email address<input
+              type="email"
+              name="email"
+              autocomplete="email"
+              required /></label
+          ><label
+            >Password<input
+              type="password"
+              name="password"
+              autocomplete="new-password"
+              required
+              minlength="8"
+            /><small>At least 8 characters.</small></label
+          >
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button class="button button-primary auth-submit" type="submit">
+            Create account <span aria-hidden="true">↗</span>
+          </button>
+        </form>
+        <p class="auth-switch">
+          Already a member? <a href="login.html">Sign in</a>
+        </p>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>
