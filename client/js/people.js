@@ -36,12 +36,13 @@ async function onFollow(event) {
   if (!getToken()) return showToast("Sign in to follow people");
   const row = event.currentTarget.closest("[data-username]");
   const following = !event.currentTarget.classList.contains("following");
-  console.log("following", following);
 
   try {
     await api(`/follows/${encodeURIComponent(row.dataset.username)}`, {
       method: following ? "POST" : "DELETE",
     });
+
+    console.log(event.currentTarget.classList);
 
     event.currentTarget.classList.toggle("following", following);
     event.currentTarget.textContent = following ? "Following" : "Follow";
