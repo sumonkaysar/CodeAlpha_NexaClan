@@ -1,0 +1,228 @@
+.profile-layout {
+  width: min(820px, 90vw);
+  margin: 32px auto 80px;
+}
+.profile-back {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.profile-card {
+  padding: 27px;
+  border: 1px solid var(--line);
+  background: white;
+}
+.profile-cover {
+  height: 116px;
+  margin: -27px -27px 0;
+  background: #dce9dc;
+  background-image:
+    radial-gradient(ellipse at 80% 20%, #c5d8cb 0, transparent 37%),
+    linear-gradient(125deg, #e4e9db, #d2e5d8);
+}
+.profile-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: -30px;
+}
+.profile-avatar {
+  width: 84px;
+  height: 84px;
+  border: 4px solid white;
+  font-size: 26px;
+}
+.profile-title {
+  flex: 1;
+  padding-bottom: 5px;
+}
+.profile-title h1 {
+  margin: 0;
+  font-size: 22px;
+}
+.profile-title p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.profile-action {
+  margin-bottom: 8px;
+}
+.profile-bio {
+  max-width: 540px;
+  margin: 16px 0;
+  font-size: 12px;
+}
+.profile-stats {
+  display: flex;
+  gap: 23px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+}
+.profile-stats strong {
+  color: var(--ink);
+}
+.profile-posts {
+  margin-top: 33px;
+}
+.profile-posts-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 15px;
+}
+.profile-posts-heading .eyebrow {
+  margin: 0;
+}
+.profile-posts-heading h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.auth-page {
+  min-height: 100vh;
+}
+.auth-topbar {
+  position: relative;
+  grid-template-columns: 1fr auto;
+}
+.back-link {
+  color: var(--muted);
+  font-size: 11px;
+}
+.auth-layout {
+  width: min(1050px, 90vw);
+  min-height: calc(100vh - 70px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 0.78fr;
+  gap: 9%;
+  align-items: center;
+  padding: 54px 0;
+}
+.auth-art {
+  position: relative;
+  min-height: 485px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 55px;
+  background: var(--green);
+  color: white;
+}
+.auth-art::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  right: -105px;
+  bottom: -150px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 38px rgb(255 255 255 / 5%),
+    0 0 0 78px rgb(255 255 255 / 4%);
+}
+.art-kicker {
+  color: #c5ddcd;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.auth-art h1 {
+  position: relative;
+  z-index: 1;
+  margin: 17px 0;
+  font-size: 56px;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+.auth-art h1 em {
+  color: #c5ddcd;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.auth-art p {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  color: #d6e4da;
+  font-size: 12px;
+}
+.art-stamp {
+  position: absolute;
+  right: 22px;
+  top: 20px;
+  color: rgb(255 255 255 / 55%);
+  font: 600 10px/1.4 var(--display);
+}
+.auth-form-wrap {
+  width: 100%;
+  max-width: 370px;
+}
+.auth-form-wrap h2 {
+  margin: 5px 0;
+  font-size: 27px;
+}
+.auth-subtitle {
+  margin: 0 0 25px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+.auth-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.auth-form input,
+.auth-form textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid #d9e0d9;
+  border-radius: 3px;
+  outline-color: var(--green);
+  background: white;
+  font: 400 12px/1.5 var(--sans);
+}
+.auth-form input {
+  height: 40px;
+}
+.auth-form textarea {
+  resize: vertical;
+}
+.auth-form small {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 400;
+}
+.auth-submit {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+.form-error {
+  min-height: 0;
+  margin: 0;
+  color: #b54129;
+  font-size: 11px;
+}
+.auth-switch {
+  margin-top: 21px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.auth-switch a {
+  color: var(--green);
+  font-weight: 700;
+}
+

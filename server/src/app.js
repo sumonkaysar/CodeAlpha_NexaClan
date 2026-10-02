@@ -6,6 +6,8 @@ const UserRouter = require("./app/modules/user/user.route");
 const PostRouter = require("./app/modules/post/post.route");
 const CommentRouter = require("./app/modules/comment/comment.route");
 const FollowRouter = require("./app/modules/follow/follow.route");
+const notFoundMiddleware = require("./app/middlewares/notFoundMiddleware");
+const errorHandlerMiddleware = require("./app/middlewares/errorHandlerMiddleware");
 
 const app = express();
 
@@ -22,10 +24,7 @@ app.get("/", (_req, res) => {
   res.status(200).json({ message: "NexaClan API is running" });
 });
 
-app.use((error, _req, res, _next) => {
-  res.status(error.statusCode || 500).json({
-    error: error.statusCode ? error.message : "Something went wrong",
-  });
-});
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 module.exports = app;
