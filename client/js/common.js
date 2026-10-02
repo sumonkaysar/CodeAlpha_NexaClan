@@ -45,7 +45,9 @@ const dateLabel = (value) => {
 
 async function api(path, options = {}) {
   const headers = {
-    ...(options.body ? { "Content-Type": "application/json" } : {}),
+    ...(options.body && !(options.body instanceof FormData)
+      ? { "Content-Type": "application/json" }
+      : {}),
     ...options.headers,
   };
   if (getToken()) headers.Authorization = `Bearer ${getToken()}`;
@@ -58,6 +60,12 @@ async function api(path, options = {}) {
   if (!response.ok)
     throw new Error(data.error || data.message || "Something went wrong");
   return data;
+}
+
+async function uploadImage(file) {
+  const formData = new FormData();
+  formData.append("image", file);
+  return api("/uploads/image", { method: "POST", body: formData });
 }
 
 let toastTimeout;

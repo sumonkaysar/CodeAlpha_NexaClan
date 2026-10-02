@@ -145,6 +145,47 @@ async function setupComposer() {
   if (currentAvatar && user?.avatarUrl)
     currentAvatar.innerHTML = `<img src="${escapeHTML(user.avatarUrl)}" alt="" />`;
   const text = document.getElementById("post-text");
+  const imageInput = document.getElementById("post-image");
+  const imageFileInput = document.getElementById("post-image-file");
+  const imageStatus = document.getElementById("post-image-status");
+  const publishButton = document.getElementById("publish-post");
+  imageFileInput.addEventListener("change", async () => {
+    const file = imageFileInput.files[0];
+    if (!file) return;
+    if (
+      !["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
+        file.type,
+      )
+    ) {
+      imageFileInput.value = "";
+      showToast("Choose a JPG, PNG, WEBP, or GIF image.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      imageFileInput.value = "";
+      showToast("Images must be 5 MB or smaller.");
+      return;
+    }
+
+    publishButton.disabled = true;
+    imageInput.disabled = true;
+    imageFileInput.disabled = true;
+    imageStatus.textContent = "Uploading…";
+    try {
+      const result = await uploadImage(file);
+      imageInput.value = result.url;
+      imageStatus.textContent = "Image uploaded";
+    } catch (error) {
+      imageStatus.textContent = "";
+      imageFileInput.value = "";
+      showToast(error.message);
+    } finally {
+      imageInput.disabled = false;
+      imageFileInput.disabled = false;
+      publishButton.disabled = false;
+    }
+  });
+
   text.addEventListener("input", () => {
     document.getElementById("char-count").textContent =
       `${text.value.length} / 2000`;
@@ -159,11 +200,13 @@ async function setupComposer() {
           method: "POST",
           body: JSON.stringify({
             text: text.value,
-            imageUrl: document.getElementById("post-image").value,
+            imageUrl: imageInput.value,
           }),
         });
         text.value = "";
-        document.getElementById("post-image").value = "";
+        imageInput.value = "";
+        imageFileInput.value = "";
+        imageStatus.textContent = "";
         document.getElementById("char-count").textContent = "0 / 2000";
         await loadPosts();
         showToast("Your post is out there");

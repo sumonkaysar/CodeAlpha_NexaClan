@@ -348,6 +348,22 @@ h3 {
   outline: 0;
   font-size: 11px;
 }
+.image-upload-button {
+  flex: 0 0 auto;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+.image-upload-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.image-upload-status {
+  color: var(--muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
 .char-count {
   color: #8a938d;
   font-size: 10px;

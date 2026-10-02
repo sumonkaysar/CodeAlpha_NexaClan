@@ -6,6 +6,7 @@ const UserRouter = require("./app/modules/user/user.route");
 const PostRouter = require("./app/modules/post/post.route");
 const CommentRouter = require("./app/modules/comment/comment.route");
 const FollowRouter = require("./app/modules/follow/follow.route");
+const UploadRouter = require("./app/modules/upload/upload.route");
 const notFoundMiddleware = require("./app/middlewares/notFoundMiddleware");
 const errorHandlerMiddleware = require("./app/middlewares/errorHandlerMiddleware");
 
@@ -19,6 +20,7 @@ app.use("/api/users", UserRouter);
 app.use("/api/posts", PostRouter);
 app.use("/api/comments", CommentRouter);
 app.use("/api/follows", FollowRouter);
+app.use("/api/uploads", UploadRouter);
 
 app.get("/", (_req, res) => {
   res.status(200).json({ message: "NexaClan API is running" });
