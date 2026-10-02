@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://nexaclan-server.vercel.app/api";
 const TOKEN_KEY = "nexaclan_token";
 const USER_KEY = "nexaclan_user";
 
