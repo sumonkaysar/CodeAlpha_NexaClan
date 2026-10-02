@@ -1,12 +1,23 @@
 function renderPerson(person) {
   return `
-    <div class="suggested-person" data-username="${escapeHTML(person.username)}">
+    <div
+      class="suggested-person"
+      data-username="${escapeHTML(person.username)}"
+    >
       ${avatar(person)}
       <div class="suggested-info">
-        <a href="profile.html?u=${encodeURIComponent(person.username)}">${escapeHTML(person.displayName)}</a>
+        <a href="profile.html?u=${encodeURIComponent(person.username)}">
+          ${escapeHTML(person.displayName)}
+        </a>
         <span>@${escapeHTML(person.username)}</span>
       </div>
-      <button class="follow-button ${person.isFollowing ? "following" : ""}" type="button">${person.isFollowing ? "Following" : "Follow"}</button>
+      <button
+        class="follow-button ${person.isFollowing ? "following" : ""}"
+        data-username="${escapeHTML(person.username)}"
+        type="button"
+      >
+        ${person.isFollowing ? "Following" : "Follow"}
+      </button>
     </div>
   `;
 }
@@ -20,9 +31,9 @@ async function loadPeople(query = "") {
       `/follows/people${query ? `?q=${encodeURIComponent(query)}` : ""}`,
     );
 
-    target.innerHTML = people.length
-      ? people.map(renderPerson).join("")
-      : '<p class="muted">No people found just yet.</p>';
+    target.innerHTML =
+      people.map(renderPerson).join("") ||
+      '<p class="muted">No people found just yet.</p>';
 
     target
       .querySelectorAll(".follow-button")
@@ -45,23 +56,19 @@ async function onFollow(event) {
       method: following ? "POST" : "DELETE",
     });
 
-    currentButton.classList.toggle("following", following);
-    currentButton.textContent = following ? "Following" : "Follow";
-
-    const profileButton = document.querySelector(
-      ".profile-action .follow-button",
-    );
+    document
+      .querySelectorAll(".follow-button")
+      .forEach((button) => {
+        if (button.dataset.username !== row.dataset.username) return;
+        button.classList.toggle("following", following);
+        button.textContent = following ? "Following" : "Follow";
+      });
 
     if (
-      profileButton &&
       row.dataset.username === new URLSearchParams(location.search).get("u")
-    ) {
-      profileButton.classList.toggle("following", following);
-      profileButton.textContent = following ? "Following" : "Follow";
-      loadProfile();
-    }
+    )
+      await loadProfile();
   } catch (error) {
-    console.log(error);
     showToast(error.message);
   }
 }
@@ -90,8 +97,20 @@ function setupSearch() {
         results.innerHTML =
           people
             .map(
-              (person) =>
-                `<a class="search-result" href="profile.html?u=${encodeURIComponent(person.username)}">${avatar(person)}<span>${escapeHTML(person.displayName)} <span class="muted">@${escapeHTML(person.username)}</span></span></a>`,
+              (person) => `
+                <a
+                  class="search-result"
+                  href="profile.html?u=${encodeURIComponent(person.username)}"
+                >
+                  ${avatar(person)}
+                  <span>
+                    ${escapeHTML(person.displayName)}
+                    <span class="muted">
+                      @${escapeHTML(person.username)}
+                    </span>
+                  </span>
+                </a>
+              `,
             )
             .join("") || '<p class="muted">No matches</p>';
 

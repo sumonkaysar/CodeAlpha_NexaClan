@@ -33,10 +33,20 @@ const initials = (person = {}) =>
 
 const avatar = (person = {}, className = "avatar") => {
   const image = person.avatarUrl
-    ? `<img src="${escapeHTML(person.avatarUrl)}" alt="" loading="lazy" />`
+    ? `
+      <img
+        src="${escapeHTML(person.avatarUrl)}"
+        alt=""
+        loading="lazy"
+      />
+    `
     : escapeHTML(initials(person));
 
-  return `<div class="${className}">${image}</div>`;
+  return `
+    <div class="${className}">
+      ${image}
+    </div>
+  `;
 };
 
 const dateLabel = (value) => {
@@ -144,7 +154,17 @@ function setupNavigation() {
   const user = getUser();
   if (!nav || !user || !getToken()) return;
 
-  nav.innerHTML = `<span class="account-user">${avatar(user)}<a href="profile.html?u=${encodeURIComponent(user.username)}">${escapeHTML(user.displayName)}</a></span><button class="text-button" id="logout-button" type="button">Sign out</button>`;
+  nav.innerHTML = `
+    <span class="account-user">
+      ${avatar(user)}
+      <a href="profile.html?u=${encodeURIComponent(user.username)}">
+        ${escapeHTML(user.displayName)}
+      </a>
+    </span>
+    <button class="text-button" id="logout-button" type="button">
+      Sign out
+    </button>
+  `;
   document.getElementById("logout-button").addEventListener("click", () => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);

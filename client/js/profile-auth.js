@@ -25,9 +25,24 @@ async function loadProfile() {
           </div>
           ${
             profile.isMe
-              ? `<a class="button button-primary profile-action" href="login.html?edit=1">Edit profile ↗</a>`
+              ? `
+                <a
+                  class="button button-primary profile-action"
+                  href="login.html?edit=1"
+                >
+                  Edit profile ↗
+                </a>
+              `
               : getToken()
-                ? `<button class="button button-primary profile-action follow-button ${profile.isFollowing ? "following" : ""}" data-username="${escapeHTML(profile.username)}" type="button">${profile.isFollowing ? "Following" : "Follow"}</button>`
+                ? `
+                  <button
+                    class="button button-primary profile-action follow-button ${profile.isFollowing ? "following" : ""}"
+                    data-username="${escapeHTML(profile.username)}"
+                    type="button"
+                  >
+                    ${profile.isFollowing ? "Following" : "Follow"}
+                  </button>
+                `
                 : ""
           }
         </div>
@@ -51,7 +66,9 @@ async function loadProfile() {
 
     await loadPosts({ username: profile.username });
   } catch (error) {
-    container.innerHTML = `<p class="empty-state">${escapeHTML(error.message)}</p>`;
+    container.innerHTML = `
+      <p class="empty-state">${escapeHTML(error.message)}</p>
+    `;
     const posts = document.getElementById("post-list");
     if (posts) posts.innerHTML = "";
   }
@@ -109,14 +126,42 @@ async function setupProfileEdit() {
       <p class="eyebrow">YOUR PROFILE</p>
       <h2>A little about you.</h2>
       <form class="auth-form" id="edit-profile-form">
-        <label>Display name<input name="displayName" value="${escapeHTML(profile.displayName)}" maxlength="48" required /></label>
-        <label>Bio<textarea name="bio" maxlength="180" rows="3">${escapeHTML(profile.bio || "")}</textarea></label>
-        <label>Avatar image URL<input name="avatarUrl" type="url" value="${escapeHTML(profile.avatarUrl || "")}" /></label>
+        <label>
+          Display name
+          <input
+            name="displayName"
+            value="${escapeHTML(profile.displayName)}"
+            maxlength="48"
+            required
+          />
+        </label>
+        <label>
+          Bio
+          <textarea
+            name="bio"
+            maxlength="180"
+            rows="3"
+          ></textarea>
+        </label>
+        <label>
+          Avatar image URL
+          <input
+            name="avatarUrl"
+            type="url"
+            value="${escapeHTML(profile.avatarUrl || "")}"
+          />
+        </label>
         <p class="form-error" id="edit-error"></p>
-        <button class="button button-primary auth-submit" type="submit">Save profile ↗</button>
+        <button
+          class="button button-primary auth-submit"
+          type="submit"
+        >
+          Save profile ↗
+        </button>
       </form>
     `;
 
+    edit.querySelector('[name="bio"]').value = profile.bio || "";
     document.querySelector(".auth-layout").replaceChildren(edit);
 
     edit.querySelector("form").addEventListener("submit", async (event) => {
