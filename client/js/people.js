@@ -34,10 +34,9 @@ async function loadPeople(query = "") {
 
 async function onFollow(event) {
   if (!getToken()) return showToast("Sign in to follow people");
-  console.log(event.currentTarget, event.target);
-
   const row = event.currentTarget.closest("[data-username]");
   const following = !event.currentTarget.classList.contains("following");
+  console.log("following", following);
 
   try {
     await api(`/follows/${encodeURIComponent(row.dataset.username)}`, {
