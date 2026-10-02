@@ -35,9 +35,52 @@
         />
         <div class="search-results" id="search-results" hidden></div>
       </form>
-      <nav class="top-actions" aria-label="Account navigation">
-        <a class="active" href="index.html">Feed</a
-        ><span id="account-nav"
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <nav
+        class="top-actions"
+        id="primary-navigation"
+        aria-label="Main navigation"
+      >
+        <button
+          class="nav-view-button active"
+          type="button"
+          data-view="home"
+          aria-controls="feed-view"
+          aria-current="page"
+          aria-pressed="true"
+        >
+          Home
+        </button>
+        <button
+          class="nav-view-button"
+          type="button"
+          data-view="people"
+          aria-controls="people-view"
+          aria-pressed="false"
+        >
+          People
+        </button>
+        <span id="account-nav"
           ><a href="login.html">Sign in</a
           ><a class="nav-join" href="register.html">Join</a></span
         >
@@ -46,8 +89,57 @@
     <main class="layout">
       <aside class="left-rail">
         <div class="rail-links">
-          <a class="rail-link active" href="index.html"><span>⌂</span> Home</a
-          ><a class="rail-link" href="#people"><span>◎</span> People</a>
+          <button
+            class="rail-link active"
+            type="button"
+            data-view="home"
+            aria-controls="feed-view"
+            aria-current="page"
+            aria-pressed="true"
+          >
+            <svg
+              class="rail-icon"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"></path>
+            </svg>
+            <span class="rail-label">
+              <strong>Home</strong>
+              <small>Your feed</small>
+            </span>
+          </button>
+          <button
+            class="rail-link"
+            type="button"
+            data-view="people"
+            aria-controls="people-view"
+            aria-pressed="false"
+          >
+            <svg
+              class="rail-icon"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="9" cy="8" r="3.5"></circle>
+              <path d="M2.5 20v-1.5A4.5 4.5 0 0 1 7 14h4a4.5 4.5 0 0 1 4.5 4.5V20z"></path>
+              <path d="M16 4.8a3.5 3.5 0 0 1 0 6.4M17 14h.5a4 4 0 0 1 4 4v2"></path>
+            </svg>
+            <span class="rail-label">
+              <strong>People</strong>
+              <small>Discover & follow</small>
+            </span>
+          </button>
         </div>
         <section class="rail-note">
           <span class="note-orbit" aria-hidden="true">✳</span>
@@ -56,7 +148,11 @@
         </section>
         <p class="rail-foot">NEXACLAN · 2026</p>
       </aside>
-      <section class="feed-column" aria-label="Social feed">
+      <section
+        class="feed-column"
+        id="feed-view"
+        aria-label="Social feed"
+      >
         <div class="feed-heading">
           <div>
             <p class="eyebrow">YOUR CORNER OF THE INTERNET</p>
@@ -141,6 +237,37 @@
         </div>
         <div class="post-list" id="post-list" aria-live="polite">
           <p class="loading-state">Gathering the latest...</p>
+        </div>
+      </section>
+      <section
+        class="people-directory"
+        id="people-view"
+        aria-labelledby="people-view-title"
+        hidden
+      >
+        <div class="directory-heading">
+          <div>
+            <p class="eyebrow">FIND YOUR PEOPLE</p>
+            <h1 id="people-view-title">People to know</h1>
+            <p>Discover people in the community, follow them, and visit their profiles.</p>
+          </div>
+          <label class="directory-search">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="directory-search"
+              type="search"
+              placeholder="Search people"
+              aria-label="Search people"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div
+          class="directory-people suggested-list"
+          id="people-directory-list"
+          aria-live="polite"
+        >
+          <p class="loading-state">Finding people...</p>
         </div>
       </section>
       <aside class="right-rail" id="people">

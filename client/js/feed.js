@@ -147,6 +147,7 @@ async function onLike(event) {
   const card = currentButton.closest(".post-card");
 
   try {
+    currentButton.disabled = true;
     const result = await api(`/posts/${card.dataset.postId}/like`, {
       method: "POST",
     });
@@ -166,6 +167,8 @@ async function onLike(event) {
     }`;
   } catch (error) {
     showToast(error.message);
+  } finally {
+    currentButton.disabled = false;
   }
 }
 

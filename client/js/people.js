@@ -23,23 +23,29 @@ function renderPerson(person) {
 }
 
 async function loadPeople(query = "") {
-  const target = document.getElementById("suggested-people");
-  if (!target) return;
+  const targets = [
+    document.getElementById("suggested-people"),
+    document.getElementById("people-directory-list"),
+  ].filter(Boolean);
+  if (!targets.length) return;
 
   try {
     const people = await api(
       `/follows/people${query ? `?q=${encodeURIComponent(query)}` : ""}`,
     );
 
-    target.innerHTML =
-      people.map(renderPerson).join("") ||
-      '<p class="muted">No people found just yet.</p>';
-
-    target
-      .querySelectorAll(".follow-button")
-      .forEach((button) => button.addEventListener("click", onFollow));
+    targets.forEach((target) => {
+      target.innerHTML =
+        people.map(renderPerson).join("") ||
+        '<p class="muted">No people found just yet.</p>';
+      target
+        .querySelectorAll(".follow-button")
+        .forEach((button) => button.addEventListener("click", onFollow));
+    });
   } catch (_error) {
-    target.innerHTML = '<p class="muted">Sign in to find your people.</p>';
+    targets.forEach((target) => {
+      target.innerHTML = '<p class="muted">Sign in to find your people.</p>';
+    });
   }
 }
 
