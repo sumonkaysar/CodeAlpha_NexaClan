@@ -34,17 +34,19 @@ async function loadPeople(query = "") {
 
 async function onFollow(event) {
   if (!getToken()) return showToast("Sign in to follow people");
-  const row = event.currentTarget.closest("[data-username]");
-  const following = !event.currentTarget.classList.contains("following");
+
+  const currentButton = event.currentTarget;
+
+  const row = currentButton.closest("[data-username]");
+  const following = !currentButton.classList.contains("following");
 
   try {
     await api(`/follows/${encodeURIComponent(row.dataset.username)}`, {
       method: following ? "POST" : "DELETE",
     });
-    console.log("onFollow", event.currentTarget);
 
-    event.currentTarget.classList.toggle("following", following);
-    event.currentTarget.textContent = following ? "Following" : "Follow";
+    currentButton.classList.toggle("following", following);
+    currentButton.textContent = following ? "Following" : "Follow";
 
     const profileButton = document.querySelector(
       ".profile-action .follow-button",
