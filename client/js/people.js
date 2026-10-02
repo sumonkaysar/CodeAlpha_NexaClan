@@ -38,7 +38,7 @@ async function onFollow(event) {
   const following = !event.currentTarget.classList.contains("following");
 
   try {
-    console.log(event.currentTarget.classList);
+    console.log(row.dataset.username, following);
 
     await api(`/follows/${encodeURIComponent(row.dataset.username)}`, {
       method: following ? "POST" : "DELETE",
@@ -60,6 +60,7 @@ async function onFollow(event) {
       loadProfile();
     }
   } catch (error) {
+    console.log(error);
     showToast(error.message);
   }
 }
