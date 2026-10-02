@@ -38,11 +38,10 @@ async function onFollow(event) {
   const following = !event.currentTarget.classList.contains("following");
 
   try {
-    console.log(row.dataset.username, following);
-
     await api(`/follows/${encodeURIComponent(row.dataset.username)}`, {
       method: following ? "POST" : "DELETE",
     });
+    console.log("onFollow", event.currentTarget);
 
     event.currentTarget.classList.toggle("following", following);
     event.currentTarget.textContent = following ? "Following" : "Follow";
