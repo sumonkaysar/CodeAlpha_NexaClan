@@ -34,3 +34,19 @@ server/
 ```
 
 Use [`server/README.md`](server/README.md) for setup and [`client/README.md`](client/README.md) for the API reference.
+
+## Local development
+
+Run MongoDB and the Express API, then serve the static client on a local HTTP origin. The server can be configured for port `5000`; complete dependency and environment instructions are in the server guide.
+
+## Authentication and media
+
+Passwords are hashed by the server, and protected routes use JWT bearer tokens. Cloudinary credentials are needed for avatar/post-image uploads. Public profile and feed browsing supports unauthenticated visitors.
+
+## Data and realtime
+
+MongoDB stores accounts, posts, comments, and follow relationships. NexaClan uses standard HTTP requests and does not currently expose Socket.IO or other WebSocket events.
+
+## Limitations
+
+The client repository does not configure a separate live deployment URL. Payment or messaging integrations are not included in the current feature set.
