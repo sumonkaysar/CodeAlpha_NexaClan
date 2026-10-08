@@ -1,6 +1,7 @@
 const API_BASE_URL = "https://nexaclan-server.vercel.app/api";
-const TOKEN_KEY = "nexaclan_token";
+const TOKEN_COOKIE_NAME = "nexaclan_token";
 const USER_KEY = "nexaclan_user";
+localStorage.removeItem(TOKEN_COOKIE_NAME);
 
 const escapeHTML = (value = "") =>
   String(value).replace(
@@ -15,7 +16,34 @@ const escapeHTML = (value = "") =>
       })[character],
   );
 
-const getToken = () => localStorage.getItem(TOKEN_KEY);
+const getToken = () => {
+  const prefix = `${TOKEN_COOKIE_NAME}=`;
+  const cookie = document.cookie
+    .split("; ")
+    .find((entry) => entry.startsWith(prefix));
+  return cookie ? decodeURIComponent(cookie.slice(prefix.length)) : null;
+};
+
+const setToken = (token) => {
+  document.cookie = `${TOKEN_COOKIE_NAME}=${encodeURIComponent(token)}; Path=/; Max-Age=7200; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
+};
+
+const clearToken = () => {
+  document.cookie = `${TOKEN_COOKIE_NAME}=; Path=/; Max-Age=0; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
+  localStorage.removeItem(TOKEN_COOKIE_NAME);
+};
+
+function handleAuthenticationFailure(response, data) {
+  if (
+    (response.status === 401 || response.status === 403) &&
+    /invalid|expired/i.test(data.error || data.message || "")
+  ) {
+    clearToken();
+    localStorage.removeItem(USER_KEY);
+    if (!/\/(login|register)\.html$/i.test(location.pathname))
+      location.href = "login.html?session=expired";
+  }
+}
 
 const getUser = () => {
   try {
@@ -73,14 +101,17 @@ async function api(path, options = {}) {
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
+    credentials: "include",
     headers,
   });
 
   if (response.status === 204) return null;
   const data = await response.json().catch(() => ({}));
 
-  if (!response.ok)
+  if (!response.ok) {
+    handleAuthenticationFailure(response, data);
     throw new Error(data.error || data.message || "Something went wrong");
+  }
 
   return data;
 }
@@ -166,7 +197,7 @@ function setupNavigation() {
     </button>
   `;
   document.getElementById("logout-button").addEventListener("click", () => {
-    localStorage.removeItem(TOKEN_KEY);
+    clearToken();
     localStorage.removeItem(USER_KEY);
     window.location.href = "index.html";
   });

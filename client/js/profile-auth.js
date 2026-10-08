@@ -80,6 +80,11 @@ async function setupAuthForm() {
 
   const isRegister = document.body.dataset.page === "register";
   const errorElement = document.getElementById("form-error");
+  if (
+    !isRegister &&
+    new URLSearchParams(location.search).get("session") === "expired"
+  )
+    errorElement.textContent = "Your session expired. Please sign in again.";
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -99,7 +104,7 @@ async function setupAuthForm() {
         body: JSON.stringify(payload),
       });
 
-      localStorage.setItem(TOKEN_KEY, result.token);
+      setToken(result.token);
       localStorage.setItem(USER_KEY, JSON.stringify(result.user));
 
       window.location.href = "index.html";
